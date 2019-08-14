@@ -19,6 +19,14 @@ nano_freq = 0
 freq_list = []
 list_var = 0
 list_avg = 0
+samp1 = 0
+samp2 = 0
+samp3 = 0
+samp4 = 0
+samp5 = 0
+samp6 = 0
+samp_list = []
+samp_var = 0
 
 
 #directory of the files
@@ -56,8 +64,7 @@ for file_name in glob.glob(os.path.join(dest_dir, '*.csv')):
 		freq_list.insert(0 , nano_freq)
 		
 	list_var = np.var(freq_list)
-	list_avg = np.average(freq_list)
-	print('Timestamp (1) Variance:', list_var, '  Avg:',list_avg)
+	samp1 = list_var
 	
 	row_cursor = 20000
 	freq_list = []
@@ -69,12 +76,12 @@ for file_name in glob.glob(os.path.join(dest_dir, '*.csv')):
 		freq_list.insert(0 , nano_freq)
 		
 	list_var = np.var(freq_list)
-	list_avg = np.average(freq_list)
-	print('Timestamp (2) Variance:', list_var, '  Avg:',list_avg)
+	samp2 = list_var
 
-	row_cursor = 50000
+
+	row_cursor = 40000
 	freq_list = []
-	while row_cursor <= 55000:
+	while row_cursor <= 45000:
 		prior_value = df.iloc[row_cursor,column_cursor]
 		row_cursor = row_cursor + 1
 		later_value = df.iloc[row_cursor,column_cursor]
@@ -82,8 +89,20 @@ for file_name in glob.glob(os.path.join(dest_dir, '*.csv')):
 		freq_list.insert(0 , nano_freq)
 		
 	list_var = np.var(freq_list)
-	list_avg = np.average(freq_list)
-	print('Timestamp (3) Variance:', list_var, '  Avg:',list_avg)
+	samp3 = list_var
+
+
+	row_cursor = 60000
+	freq_list = []
+	while row_cursor <= 65000:
+		prior_value = df.iloc[row_cursor,column_cursor]
+		row_cursor = row_cursor + 1
+		later_value = df.iloc[row_cursor,column_cursor]
+		nano_freq = later_value - prior_value
+		freq_list.insert(0 , nano_freq)
+		
+	list_var = np.var(freq_list)
+	samp4 = list_var
 
 	row_cursor = 80000
 	freq_list = []
@@ -95,8 +114,20 @@ for file_name in glob.glob(os.path.join(dest_dir, '*.csv')):
 		freq_list.insert(0 , nano_freq)
 		
 	list_var = np.var(freq_list)
-	list_avg = np.average(freq_list)
-	print('Timestamp (4) Variance:', list_var, '  Avg:',list_avg)
+	samp5 = list_var
+
+
+	row_cursor = 100000
+	freq_list = []
+	while row_cursor <= 105000:
+		prior_value = df.iloc[row_cursor,column_cursor]
+		row_cursor = row_cursor + 1
+		later_value = df.iloc[row_cursor,column_cursor]
+		nano_freq = later_value - prior_value
+		freq_list.insert(0 , nano_freq)
+		
+	list_var = np.var(freq_list)
+	samp6 = list_var
 
 
 	row_cursor = 0
@@ -109,13 +140,24 @@ for file_name in glob.glob(os.path.join(dest_dir, '*.csv')):
 		freq_list.insert(0 , nano_freq)
 		
 	list_var = np.var(freq_list)
-	list_avg = np.average(freq_list)
-	print('Timestam(Tot) Variance:', list_var, '  Avg:',list_avg)
+	samp_list = [samp1,samp2,samp3,samp4,samp5,samp6]
+	samp_var = np.var(samp_list)
+
+
+	print('Samp1:',samp1)
+	print('Samp2:', samp2)
+	print('Samp3:', samp3)
+	print('Samp4:',samp4)
+	print('Samp5:',samp5)
+	print('Samp6:',samp6)		
+	print('Total:',list_var)
+	print('Samp Var:', samp_var)
+
 
 
 	row_cursor = 0
 	freq_list = []
-
+	samp_list = []
 
 
 
